@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+/home/kemi/Dropbox/and-loc/.metadata/.plugins/org.eclipse.jdt.core
+1975101786.index
+1270315800.index
