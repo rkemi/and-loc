@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
@@ -45,6 +46,12 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    public void displayMessage(View view){
+        TextView t = (TextView)findViewById(R.id.wifi_display); 
+        t.append("" + "Step One: blast egg");
+        
+    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -61,5 +68,7 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
+    
+    
 
 }
