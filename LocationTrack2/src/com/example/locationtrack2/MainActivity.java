@@ -1,10 +1,12 @@
-package com.example.locationtrack;
+package com.example.locationtrack2;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.example.locationtrack.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
