@@ -33,21 +33,26 @@ public class ScanActivity extends ActionBarActivity {
 		}
 		
 		
-		manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-		WifiScanReceiver wifiReciever = new WifiScanReceiver();
-		registerReceiver(wifiReciever, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));  
+	//	manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+	//	WifiScanReceiver wifiReciever = new WifiScanReceiver();
+	//	registerReceiver(wifiReciever, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));  
 		
 		
-		
-		List<ScanResult> wifis = getScanResults();
-		TextView t2 = new TextView(this);
-		t2.setText("APA");
-		if (!wifis.equals(null)) { 
-			t2.setText("wifis: " + wifis.size());
-		}
-		else {
-			t2.setText("wifis: JÄVLA NULL");
-		}
+      //  TextView t2 = new TextView(this);
+      TextView t2 = (TextView)findViewById(R.id.scanned_wifis); 
+     	//if (manager.startScan()){
+      
+		//	t2.setText("Scan made: ");
+		//}
+        t2.setText("No scan made: ");
+		//List<ScanResult> wifis = getScanResults();
+	//	t2.setText("APA");
+		//if (!wifis.equals(null)) { 
+	//		t2.setText("wifis!!!!!!: " + wifis.size());
+	//	}
+	//	else {
+	//		t2.setText("wifis-----: JÄVLA NULL");
+	//	}
 	}
 	
 	public List<ScanResult> getScanResults () {
