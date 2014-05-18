@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.UUID;
 
 import com.example.locationtrack.R;
@@ -13,6 +15,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
+import android.text.format.DateFormat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -73,8 +76,12 @@ public class MainActivity extends ActionBarActivity {
     
     public void displayMessage(View view){
     	
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm:ss");
         
-
+        String time = "" +dateFormat.format(cal.getTime());
+        String phoneId = "" + Secure.getString(MainActivity.this.getContentResolver(),
+                Secure.ANDROID_ID);
 
         TextView t = (TextView)findViewById(R.id.wifi_display); 
         ConnInfo connInfo = getWifiStats();
@@ -86,9 +93,7 @@ public class MainActivity extends ActionBarActivity {
         		+ "Noise: " + connInfo.getQuality().getNoise() + "\n");
         
 
-        String time = "" +System.currentTimeMillis();
-        String phoneId = "" + Secure.getString(MainActivity.this.getContentResolver(),
-                Secure.ANDROID_ID);
+
         ////Skicka upp kod
         String url = "http://loc-track.herokuapp.com/new/id="+phoneId+"&time="+time+"&bssid="+connInfo.getMAC();
         Intent i = new Intent(Intent.ACTION_VIEW);  
