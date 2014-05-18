@@ -39,12 +39,14 @@ public class ScanActivity extends ActionBarActivity {
 		
 		
       //  TextView t2 = new TextView(this);
-      TextView t2 = (TextView)findViewById(R.id.scanned_wifis); 
+      TextView t2 = (TextView)findViewById(R.id.scanned_wifis);
+      System.out.println("LOGLOGLOGLOGLOGLOG");
+      System.out.println("T2: "+t2);
      	//if (manager.startScan()){
       
-		//	t2.setText("Scan made: ");
+      t2.setText("Scan made: ");
 		//}
-        t2.setText("No scan made: ");
+       // t2.setText("No scan made: ");
 		//List<ScanResult> wifis = getScanResults();
 	//	t2.setText("APA");
 		//if (!wifis.equals(null)) { 
