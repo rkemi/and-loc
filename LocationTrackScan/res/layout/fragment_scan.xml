@@ -12,6 +12,6 @@
         android:id="@+id/scanned_wifis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/scanned_wifis" />
+        android:text="@string/scanned_wifi_string" />
     
 </RelativeLayout>
