@@ -15,5 +15,8 @@ CREATE TABLE Logs (
 	time VARCHAR(30),
 	id VARCHAR(30) REFERENCES Phones(id),
 	bssid VARCHAR(17) REFERENCES Aps(bssid),
+	link INTEGER,
+	level INTEGER,
+	noise INTEGER,
 	PRIMARY KEY (time, id, bssid)
 );
