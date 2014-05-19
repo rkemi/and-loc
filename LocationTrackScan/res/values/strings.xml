@@ -8,6 +8,6 @@
     <string name="wifi_display">This should display wifi info</string>
     <string name="scan_wifi">Scan Wifi</string>
     <string name="title_activity_scan">ScanActivity</string>
-    <string name="scanned_wifis">Wifis: ??</string>
+    <string name="scanned_wifi_string">Wifis: ??</string>
 
 </resources>

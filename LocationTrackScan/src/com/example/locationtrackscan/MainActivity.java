@@ -64,8 +64,15 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void scanWifi(View view) {
-    	Intent scanIntent = new Intent(this, ScanActivity.class);
-    	startActivity(scanIntent);
+    	TextView t = (TextView)findViewById(R.id.wifi_display);
+    	Intent scanIntent = new Intent(MainActivity.this, ScanActivity.class);
+    	try{
+    	MainActivity.this.startActivity(scanIntent);
+    	}catch(Exception e){
+
+        	t.setText("hejejejejejeje " + e);
+    	}
+
     }
     
     private ConnInfo getWifiStats(){

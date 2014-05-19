@@ -5,12 +5,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.UUID;
 
 import com.example.locationtrack.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
+import android.text.format.DateFormat;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,13 +29,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.os.Build;
+import android.provider.Settings.Secure;
+
+
 
 public class MainActivity extends ActionBarActivity {
 
-    @Override
+    private static String uniqueID = null;
+    private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
+
+
+
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -56,6 +75,14 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void displayMessage(View view){
+    	
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm:ss");
+        
+        String time = "" +dateFormat.format(cal.getTime());
+        String phoneId = "" + Secure.getString(MainActivity.this.getContentResolver(),
+                Secure.ANDROID_ID);
+
         TextView t = (TextView)findViewById(R.id.wifi_display); 
         ConnInfo connInfo = getWifiStats();
         t.setText("IP: " + connInfo.getIp() + "\n"
@@ -65,7 +92,31 @@ public class MainActivity extends ActionBarActivity {
         		+ "Level: " + connInfo.getQuality().getLevel() + "\n"
         		+ "Noise: " + connInfo.getQuality().getNoise() + "\n");
         
+
+
+        ////Skicka upp kod
+        String url = "http://loc-track.herokuapp.com/new/id="+phoneId+"&time="+time+"&bssid="+connInfo.getMAC();
+        Intent i = new Intent(Intent.ACTION_VIEW);  
+        i.setData(Uri.parse(url ));  
+        startActivity(i); 
         
+    }
+    
+ 
+    
+    public synchronized static String id(Context context) {
+        if (uniqueID == null) {
+            SharedPreferences sharedPrefs = context.getSharedPreferences(
+                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+            if (uniqueID == null) {
+                uniqueID = UUID.randomUUID().toString();
+                Editor editor = sharedPrefs.edit();
+                editor.putString(PREF_UNIQUE_ID, uniqueID);
+                editor.commit();
+            }
+        }
+        return uniqueID;
     }
     
     private ConnInfo getWifiStats(){
